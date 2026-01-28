@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_body_health_calculator_app/views/about_ui.dart';
+import 'package:flutter_body_health_calculator_app/views/bmi_ui.dart';
+import 'package:flutter_body_health_calculator_app/views/bmr_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeUi extends StatefulWidget {
   const HomeUi({super.key});
@@ -8,8 +12,60 @@ class HomeUi extends StatefulWidget {
 }
 
 class _HomeUiState extends State<HomeUi> {
+
+  //สร้างตัวแปรควบคุม currentIndex ของ BarItem
+  int currentIndexStatus = 1;
+  //สร้างตัวแปรเก็บ widget หน้าจอที่จะมาแสดงที่ body ของ Scaffold
+  List<Widget> showBody = [
+    BmiUi(),
+    AboutUi(),
+    BmrUi(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Color(0xFFFFA07A),
+      appBar: AppBar(
+        backgroundColor: Color(0xFFE9967A),
+        title: Text(
+          'Body Health Calculator',
+          style: TextStyle(
+            color: Colors.white
+          ),
+        ),
+        centerTitle: true,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          setState(() {
+            currentIndexStatus = value;
+          });
+        },
+        currentIndex: currentIndexStatus,
+        selectedItemColor: Color(0xFFE9967A),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person_2_outlined,
+            ),
+            label: 'BMI',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'About',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.personBooth,
+            ),
+            label: 'BMR',
+          ),
+        ],
+      ),
+      body: showBody[currentIndexStatus],
+    );
   }
 }
