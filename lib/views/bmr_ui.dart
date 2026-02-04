@@ -85,6 +85,13 @@ class _BmrUiState extends State<BmrUi> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            Align(
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/images/exercise.png',
+                height: 150,
+              ),
+            ),
             Row(
               children: [
                 Expanded(
